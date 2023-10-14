@@ -16,12 +16,22 @@
         </style>
     </head>
     <body class="antialiased">
+        <!--
         <ul>
-            <li><a href="<?= route('welcome');?>">Home</a></li>
+            <li><a href="<?= route('welcome');?>">Home</a></li> Esto es de forma PHP (no recomendada en Laravel)
             <li><a href="<?= route('contact');?>">Contacto</a></li>
             <li><a href="<?= route('blog');?>">Blog</a></li>
             <li><a href="<?= route('about');?>">About</a></li>
         </ul>
+        <h1>Welcome</h1>
+        <ul>
+            <li><a href="{{ route('welcome') }}">Home</a></li> <!--Esto es de forma blade, el motor de vistas de Laravel (recomendada en Laravel
+            <li><a href="{{ route('contact') }}">Contacto</a></li>
+            <li><a href="{{ route('blog') }}">Blog</a></li>
+            <li><a href="{{ route('about') }}">About</a></li>
+        </ul>
+        -->
+        @include('partials.navigation') <!--Inyectamos la vista navigation que está dentro de la carpeta 'partials'-->
         <h1>Welcome</h1>
     </body>
 </html>

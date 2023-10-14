@@ -19,10 +19,19 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::view('/', 'welcome'); //Forma 2
+/*Route::view('/', 'welcome'); //Forma 2
 
 Route::view('/contact', 'contact');
 
 Route::view('/blog', 'blog');
 
-Route::view('/about', 'about');
+Route::view('/about', 'about');*/
+
+
+Route::view('/', 'welcome')->name('welcome'); //Forma 3 (Recomendada)
+
+Route::view('/contact', 'contact')->name('contact');
+
+Route::view('/blog', 'blog')->name('blog');
+
+Route::view('/about', 'about')->name('about');

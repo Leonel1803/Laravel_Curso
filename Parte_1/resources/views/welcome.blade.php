@@ -17,10 +17,10 @@
     </head>
     <body class="antialiased">
         <ul>
-            <li><a href="/Laravel_Curso/Parte_1/public/">Home</a></li>
-            <li><a href="/Laravel_Curso/Parte_1/public/contact">Contacto</a></li>
-            <li><a href="/Laravel_Curso/Parte_1/public/blog">Blog</a></li>
-            <li><a href="/Laravel_Curso/Parte_1/public/about">About</a></li>
+            <li><a href="<?= route('welcome');?>">Home</a></li>
+            <li><a href="<?= route('contact');?>">Contacto</a></li>
+            <li><a href="<?= route('blog');?>">Blog</a></li>
+            <li><a href="<?= route('about');?>">About</a></li>
         </ul>
         <h1>Welcome</h1>
     </body>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +28,39 @@ Route::view('/blog', 'blog');
 
 Route::view('/about', 'about');*/
 
+$post = [
+    ['title' => 'First post'],
+    ['title' => 'Second post'],
+    ['title' => 'Third post'],
+    ['title' => 'Fourth post'],
+];
+
 
 Route::view('/', 'welcome')->name('welcome'); //Forma 3 (Recomendada)
 
 Route::view('/contact', 'contact')->name('contact');
 
-Route::view('/blog', 'blog')->name('blog');
+Route::view('/blog', 'blog', ['posts' => $post])->name('blog');
+
+Route::get('/blog2', function(){
+    $post = [
+        ['title' => 'First post'],
+        ['title' => 'Second post'],
+        ['title' => 'Third post'],
+        ['title' => 'Fourth post'],
+    ];
+
+    return view('blog2', ['posts' => $post]);
+})->name('blog2');
+
+Route::get('/blog3', PostController::class)->name('blog3');
+
+Route::get('/blog4', [PostController::class, 'index'])->name('blog4');
+
+Route::get('/blog5', [PostController::class, 'index2'])->name('blog5');
 
 Route::view('/about', 'about')->name('about');
+
+Route::view('/welcome2', 'welcome2')->name('welcome2');
+
+Route::view('/welcome3', 'welcome3')->name('welcome3');

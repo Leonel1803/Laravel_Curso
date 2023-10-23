@@ -59,6 +59,10 @@ Route::get('/blog4', [PostController::class, 'index'])->name('blog4');
 
 Route::get('/blog5', [PostController::class, 'index2'])->name('blog5');
 
+Route::get('/blog6', [PostController::class, 'index3'])->name('blog6');
+
+Route::get('/blog7', [PostController::class, 'index4'])->name('blog7');
+
 Route::view('/about', 'about')->name('about');
 
 Route::view('/welcome2', 'welcome2')->name('welcome2');

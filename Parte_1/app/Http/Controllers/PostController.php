@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 use App\Models\Postm;
 
 class PostController extends Controller{
@@ -29,7 +30,9 @@ class PostController extends Controller{
     }
 
     public function index2(){
-        $post = DB::table('posts')->get();
+        //$post = DB::table('posts')->get(); Forma sin eloquent
+        $post = Post::get();
+
 
         return view('blog5', ['posts' => $post]);
     }
@@ -41,9 +44,21 @@ class PostController extends Controller{
     }
 
     public function index4(){
-        $post = Postm::get();
+        $mofifyPost = Postm::find(1); //Buscamos una fila por su ID
+        $mofifyPost->title = "He modifiado este titulo";
+        //Modificamos los datos de una fila ya existente
 
-        //$post->save(); esta linea nos permite guardar los cambios hechos en memoria dentro ya de la tabla referenciada en la base de datos
+        //$modifyPost->delete(); esta linea es para eliminar la fila seleccionada
+        $mofifyPost->save(); //esta linea nos permite guardar los cambios hechos en memoria dentro ya de la tabla referenciada en la base de datos
+
+        $createPost = new Postm;
+        $createPost->title = "He creado un nuevo título";
+        $createPost->body = "Este es un nuevo cuerpo";
+        //Creamos una nueva fila junto con otros datos
+
+        $createPost->save();//esta linea nos permite guardar los cambios hechos en memoria dentro ya de la tabla referenciada en la base de datos
+
+        $post = Postm::get();
 
         return view('blog7', ['posts' => $post]);
     }

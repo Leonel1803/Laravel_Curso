@@ -62,6 +62,11 @@ Route::get('/blog5', [PostController::class, 'index2'])->name('blog5');
 Route::get('/blog6', [PostController::class, 'index3'])->name('blog6');
 
 Route::get('/blog7', [PostController::class, 'index4'])->name('blog7');
+Route::get('/blog7/create', [PostController::class, 'create'])->name('post.create'); //El orden de declaración de rutas importa, el declarar esta primero, no se confunidar con el show
+Route::post('/blog7', [PostController::class, 'store'])->name('post.store'); //Create muestra el formulario, y store almacena los datos (recibe posts)
+Route::get('/blog7/{post}', [PostController::class, 'show'])->name('post.show'); //{post} es un Route Parameter para poder pasar parámetros útiles para los m´wetodos de los controladores
+Route::get('/blog7/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+//Al final van las rutas que reciben variables
 
 Route::view('/about', 'about')->name('about');
 

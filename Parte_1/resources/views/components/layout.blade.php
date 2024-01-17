@@ -14,16 +14,16 @@
 
         <!-- Styles -->
         <style>
-           
+
         </style>
     </head>
     <body class="antialiased">
 
         <x-navigation></x-navigation>
 
-        <pre>{{ $sum }}</pre>
-        <pre>{{ $sum2 }}</pre>
+        <!--<pre>{{ $sum ?? 1}}</pre>-->
+        <!--<pre>{{ $sum2 ?? 1}}</pre>-->
 
-        {{ $slot }}
+        {{ $slot }} <!--Aquí ya va el contenido de la vista en la que se implementa este componente-->
     </body>
 </html>

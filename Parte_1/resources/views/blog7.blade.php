@@ -17,10 +17,23 @@
     </head>
     <body class="antialiased">
         @include('partials.navigation') <!--Inyectamos la vista navigation que está dentro de la carpeta 'partials'-->
+
+        @if(session('status')) <!--Si es que el mensaje existe, se muestra-->
+            <div class="status">
+                {{ session('status') }} <!--Mostrar aviso de post creado-->
+            </div>
+        @endif
+
         <h1>Blog</h1>
+        <a href="{{ route('post.create') }} ">Crear nuevo post</a>
+        <br>
         @foreach($posts as $post)
-            <h4>{{ $post->title }}</h4>
-            <h6>{{ $post->body }}</h6>
+            <div style="display: flex; align-items: baseline">
+                <h4>{{ $post->title }}</h4>
+                &nbsp;
+                <a href="{{ route('post.edit', $post) }}">Editar Post</a>
+            </div>
+            <a href="{{ route('post.show', $post->id) }}">{{ $post->body }}</a>
         @endforeach
     </body>
 </html>

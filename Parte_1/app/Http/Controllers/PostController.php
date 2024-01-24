@@ -64,7 +64,7 @@ class PostController extends Controller{
         return view('blog7', ['posts' => $post]);
     }
 
-    public function show(Postm $post){ //Poninedo Postm como clase del parámetro, automáticamente se ahará el find
+    public function show(Postm $post){ //Poninedo Postm como clase del parámetro, automáticamente se hará el find
         //return Postm::findOrFail($post);
 
         //return $post;
@@ -98,5 +98,20 @@ class PostController extends Controller{
     public function edit(Postm $post){
 
         return view('postms.edit', ['post' => $post]);
+    }
+
+    public function update(Request $request, Postm $post){
+        $request->validate([
+            'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
+            'body' => ['required']
+        ]);
+
+        $post->title =  $request->input('title');
+        $post->body =  $request->input('body');
+        $post->save();
+
+        session()->flash('status', 'Post actualizado'); //Guarda info en la variable de sesión llamada "status"
+
+        return redirect()->route('blog7');
     }
 }

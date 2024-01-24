@@ -66,6 +66,7 @@ Route::get('/blog7/create', [PostController::class, 'create'])->name('post.creat
 Route::post('/blog7', [PostController::class, 'store'])->name('post.store'); //Create muestra el formulario, y store almacena los datos (recibe posts)
 Route::get('/blog7/{post}', [PostController::class, 'show'])->name('post.show'); //{post} es un Route Parameter para poder pasar parámetros útiles para los m´wetodos de los controladores
 Route::get('/blog7/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::patch('/blog7/{post}', [PostController::class, 'update'])->name('post.update'); //Para actualizar se puede usar put o patch, por lo general put es para reemplazar un registro y patch para actualizar un registro
 //Al final van las rutas que reciben variables
 
 Route::view('/about', 'about')->name('about');

@@ -1,8 +1,8 @@
 <x-layout :title="$post->title" :meta-descritpion="$post->body">
     <h1>Formulario de edición</h1>
-    <form action="{{ route('post.store') }}" method="POST">
-        @csrf <!--Esta directiva sirve para solucionar el error 419, esto es debido al CSRF y Laravel nos protege de problemas relacionados con esto-->
-        <label for="">
+    <form action="{{ route('post.update', $post) }}" method="POST">
+        @csrf @method('PATCH')<!--Esta directiva sirve para solucionar el error 419, esto es debido al CSRF y Laravel nos protege de problemas relacionados con esto-->
+        <label for=""><!--USamos @method('PÄTCH') para que acepte rutas patch-->
             Titulo
             <input type="text" name="title" value="{{ old('title', $post->title) }}"><!--old('title') es el valor de title antes de que se reseteara el formulario gracias al mensaje de rror que se puede llegar a dar-->
         </label>

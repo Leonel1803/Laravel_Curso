@@ -72,12 +72,12 @@ class PostController extends Controller{
     }
 
     public function create(){
-        return view('postms.create');
+        return view('postms.create', ['post' => new Postm]); //Mandamos la vista junto con un post para que el old pueda tener un valor y no de error
     }
 
     public function store(Request $request){
         //return $request->input('title');
-        $request->validate([
+        $validatedFields = $request->validate([
             'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
             'body' => ['required']
         ], [
@@ -85,10 +85,17 @@ class PostController extends Controller{
             'body.required' => 'El campo de body es obligatorio'
         ]);
 
-        $post = new Postm;
-        $post->title =  $request->input('title');
-        $post->body =  $request->input('body');
-        $post->save();
+        // $post = new Postm;
+        // $post->title =  $request->input('title');
+        // $post->body =  $request->input('body');
+        // $post->save();
+
+        // Postm::create([ //Lo simplificamos en comparación a cómo estaba antes
+        //     'title' => $request->input('title'),
+        //     'body' => $request->input('body')
+        // ]);
+
+        Postm::create($validatedFields); //Aun más simplificado
 
         session()->flash('status', 'Post creado'); //Guarda info en la variable de sesión llamada "status"
 
@@ -101,14 +108,21 @@ class PostController extends Controller{
     }
 
     public function update(Request $request, Postm $post){
-        $request->validate([
+        $validatedFields = $request->validate([
             'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
             'body' => ['required']
         ]);
 
-        $post->title =  $request->input('title');
-        $post->body =  $request->input('body');
-        $post->save();
+        // $post->title =  $request->input('title');
+        // $post->body =  $request->input('body');
+        // $post->save();
+
+        // $post->update([ //Más simplificado
+        //     'title' => $request->input('title'),
+        //     'body' => $request->input('body')
+        // ]);
+
+        $post->update($validatedFields); //Aun más simplificados
 
         session()->flash('status', 'Post actualizado'); //Guarda info en la variable de sesión llamada "status"
 

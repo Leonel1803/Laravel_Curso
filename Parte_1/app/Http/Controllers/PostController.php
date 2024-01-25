@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostmFormRequest;
 use App\Models\Post;
 use App\Models\Postm;
 
@@ -75,15 +76,16 @@ class PostController extends Controller{
         return view('postms.create', ['post' => new Postm]); //Mandamos la vista junto con un post para que el old pueda tener un valor y no de error
     }
 
-    public function store(Request $request){
+    public function store(PostmFormRequest $request){//Usamos PostmFormRequest ya que al pasarlo así, de manera oblgatoria Laravel ejecuta la validación que está puesta en esa clase
         //return $request->input('title');
-        $validatedFields = $request->validate([
-            'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
-            'body' => ['required']
-        ], [
-            'title.required' => 'El campo de título es obligatorio', //Aquí estamos personalizando los mensajes de error dependiendo del error que salga, en este caso el de required
-            'body.required' => 'El campo de body es obligatorio'
-        ]);
+
+        // $validatedFields = $request->validate([
+        //     'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
+        //     'body' => ['required']
+        // ], [
+        //     'title.required' => 'El campo de título es obligatorio', //Aquí estamos personalizando los mensajes de error dependiendo del error que salga, en este caso el de required
+        //     'body.required' => 'El campo de body es obligatorio'
+        // ]);
 
         // $post = new Postm;
         // $post->title =  $request->input('title');
@@ -95,11 +97,14 @@ class PostController extends Controller{
         //     'body' => $request->input('body')
         // ]);
 
-        Postm::create($validatedFields); //Aun más simplificado
+        Postm::create($request->validated()); //Aun más simplificado
 
-        session()->flash('status', 'Post creado'); //Guarda info en la variable de sesión llamada "status"
 
-        return redirect()->route('blog7');
+        // session()->flash('status', 'Post creado'); //Guarda info en la variable de sesión llamada "status"
+
+        // return redirect()->route('blog7');
+
+        return redirect()->route('blog7')->with('status', 'Post creado!'); //Usamos este para ahorrarnos usar el session()->flash
     }
 
     public function edit(Postm $post){
@@ -107,12 +112,7 @@ class PostController extends Controller{
         return view('postms.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, Postm $post){
-        $validatedFields = $request->validate([
-            'title' => ['required'], //Aquí está indicando que no se puede pasar la variable 'title' sin ningún contenido
-            'body' => ['required']
-        ]);
-
+    public function update(/*Request $request*/PostmFormRequest $request, Postm $post){ //Usamos PostmFormRequest ya que al pasarlo así, de manera oblgatoria Laravel ejecuta la validación que está puesta en esa clase
         // $post->title =  $request->input('title');
         // $post->body =  $request->input('body');
         // $post->save();
@@ -122,10 +122,13 @@ class PostController extends Controller{
         //     'body' => $request->input('body')
         // ]);
 
-        $post->update($validatedFields); //Aun más simplificados
+        $post->update($request->validated()); //Aun más simplificados //Pasando el request como clase de validación (PostmFormRequest), agarra los campos que pusimos en el formulario, por lo cual sigue siendo valido al pasar a la base de datos
 
-        session()->flash('status', 'Post actualizado'); //Guarda info en la variable de sesión llamada "status"
 
-        return redirect()->route('blog7');
+        // session()->flash('status', 'Post actualizado'); //Guarda info en la variable de sesión llamada "status"
+
+        // return redirect()->route('blog7');
+
+        return redirect()->route('blog7')->with('status', 'Post actualizado'); //Usamos este para ahorrarnos usar el session()->flash
     }
 }

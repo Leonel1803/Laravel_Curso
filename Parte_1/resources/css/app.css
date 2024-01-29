@@ -1,5 +1,0 @@
-@import 'bootstrap/css/bootstrap'; /*Importamos Bootstrap después de instalarlo*/
-
-a:hover{
-    color: brown;
-}

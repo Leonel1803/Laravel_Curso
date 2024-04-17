@@ -28,12 +28,14 @@
         <a href="{{ route('post.create') }} ">Crear nuevo post</a>
         <br>
         @foreach($posts as $post)
-            <div style="display: flex; align-items: baseline">
-                <h4>{{ $post->title }}</h4>
-                &nbsp;
-                <a href="{{ route('post.edit', $post) }}">Editar Post</a>
+            <div  class="my-4">
+                <div style="display: flex; align-items: baseline" class="text-lg">
+                    <h4>{{ $post->title }}</h4>
+                    &nbsp;
+                    <a href="{{ route('post.edit', $post) }}" class="rounded-full bg-slate-700 text-white px-2">Editar Post</a>
+                </div>
+                <a href="{{ route('post.show', $post->id) }}">{{ $post->body }}</a>
             </div>
-            <a href="{{ route('post.show', $post->id) }}">{{ $post->body }}</a>
         @endforeach
     </body>
 </html>
